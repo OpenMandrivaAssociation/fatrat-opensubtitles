@@ -15,7 +15,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: zlib-devel
 BuildRequires: cmake 
 
+BuildRequires: fatrat-devel = %{version}
 Requires: fatrat = %{version}
+
 Requires: zlib
 %description
 FatRat is an open source download manager for Linux/Unix systems written in C++ with the help of the Trolltech Qt 4 library. It is rich in features and is continuously developed.
@@ -41,3 +43,4 @@ rm -rf %{buildroot}
 %{_libdir}/%{oname}/plugins/lib%{name}.so
 %{_docdir}/%{name}/TRANSLATIONS
 
+%changelog
