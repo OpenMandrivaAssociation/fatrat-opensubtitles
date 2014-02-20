@@ -3,7 +3,7 @@
 Summary:	OpenSubtitles plugin for FatRat
 Name:		fatrat-opensubtitles
 Version:	1.1.3
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Networking/File transfer
 Url:		http://fatrat.dolezel.info/
@@ -26,6 +26,7 @@ continuously developed.
 
 %prep
 %setup -q
+sed s,lib/fatrat/plugins,%{_lib}/fatrat/plugins,g -i CMakeLists.txt
 
 %build
 %cmake_qt4
