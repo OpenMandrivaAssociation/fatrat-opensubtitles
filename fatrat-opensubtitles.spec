@@ -1,46 +1,37 @@
-%define name fatrat-opensubtitles
-%define oname fatrat
-%define version 1.1.2
-%define release %mkrel 1
+%define _disable_ld_no_undefined 1
 
-Summary: OpenSubtitles plugin for FatRat
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: %{name}-%{version}.tar.gz
-License: GPLv2
-Group: Networking/File transfer
-Url:   http://fatrat.dolezel.info/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: zlib-devel
-BuildRequires: cmake 
+Summary:	OpenSubtitles plugin for FatRat
+Name:		fatrat-opensubtitles
+Version:	1.1.3
+Release:	1
+License:	GPLv2+
+Group:		Networking/File transfer
+Url:		http://fatrat.dolezel.info/
+Source0:	%{name}-%{version}.tar.gz
+BuildRequires:	cmake
+BuildRequires:	fatrat-devel
+BuildRequires:	pkgconfig(zlib)
+Requires:	fatrat
 
-BuildRequires: fatrat-devel = %{version}
-Requires: fatrat = %{version}
-
-Requires: zlib
 %description
-FatRat is an open source download manager for Linux/Unix systems written in C++ with the help of the Trolltech Qt 4 library. It is rich in features and is continuously developed.
+FatRat is an open source download manager for Linux/Unix systems written
+in C++ with the help of the Qt4 library. It is rich in features and is
+continuously developed.
+
+%files
+%{_libdir}/fatrat/plugins/lib%{name}.so
+%{_docdir}/%{name}/TRANSLATIONS
+
+#----------------------------------------------------------------------------
 
 %prep
 %setup -q
 
 %build
-cmake . -DCMAKE_INSTALL_PREFIX=%{_prefix}
-
+%cmake_qt4
 %make
 
 %install
-rm -rf %{buildroot}
-%makeinstall_std
-%find_lang %{name}
+%makeinstall_std -C build
 
-%clean
-rm -rf %{buildroot}
 
-%files -f %{name}.lang
-%defattr(-,root,root)
-%{_libdir}/%{oname}/plugins/lib%{name}.so
-%{_docdir}/%{name}/TRANSLATIONS
-
-%changelog
