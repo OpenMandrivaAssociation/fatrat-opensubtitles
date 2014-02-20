@@ -10,6 +10,7 @@ Url:		http://fatrat.dolezel.info/
 Source0:	%{name}-%{version}.tar.gz
 BuildRequires:	cmake
 BuildRequires:	fatrat-devel
+BuildRequires:	qt4-devel
 BuildRequires:	pkgconfig(zlib)
 Requires:	fatrat
 
